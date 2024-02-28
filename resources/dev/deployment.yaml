@@ -17,6 +17,7 @@ spec:
       containers:
       - name: password-generator
         image: 060696/password-generator:1.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         resources:
@@ -26,5 +27,4 @@ spec:
           requests:
             memory: 300Mi
             cpu: 500m
-      restartPolicy: OnFailure
-      imagePullPolicy: IfNotPresent
+      restartPolicy: Always
