@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: password-generator-deployment
+  name: password-generator
   labels:
     app: password-generator
 spec:
