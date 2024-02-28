@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: password-generator-svc
 spec:
   selector:
     app: password-generator
@@ -9,5 +9,5 @@ spec:
   ports:
     - name: http
       protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 80
