@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: password-generator-deployment
+  labels:
+    app: password-generator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: password-generator
+  template:
+    metadata:
+      labels:
+        app: password-generator
+    spec:
+      containers:
+      - name: password-generator
+        image: 060696/password-generator:1.0
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 600Mi
+            cpu: 1
+          requests:
+            memory: 300Mi
+            cpu: 500m
+      restartPolicy: OnFailure
+      imagePullPolicy: IfNotPresent

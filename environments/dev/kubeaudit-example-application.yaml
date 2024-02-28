@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeaudit-example-dev
+  namespace: argocd
+spec:
+  destination:
+    namespace: kubeaudit-example
+    server: https://kubernetes.default.svc
+  project: kubeaudit-demo
+  source:
+    path: ./resources/dev
+    repoURL: git@github.com:phapaleganesh/kubeaudit-example.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true

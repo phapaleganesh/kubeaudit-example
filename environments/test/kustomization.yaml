@@ -1,0 +1,10 @@
+---
+namespace: test-ui
+replicas:
+  - name: ui-app
+    count: 1
+images:
+  - name: esg-db-docker-scratch.art.tools.deloitteinnovation.us/esg-db/carbon-emission-ui
+    newTag: 0.1.2-beta.2234
+resources:
+  - ./resources/test

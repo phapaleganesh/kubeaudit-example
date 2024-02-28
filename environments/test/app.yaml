@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: myalias=esg-db-docker-scratch.art.tools.deloitteinnovation.us/esg-db/carbon-emission-ui:~0.1.2-beta
+    #argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/repo-1147069572#sshPrivateKey
+    argocd-image-updater.argoproj.io/myalias.pull-secret: pullsecret:argocd/jfrog-regcred
+    argocd-image-updater.argoproj.io/myalias.update-strategy: latest
+    argocd-image-updater.argoproj.io/myalias.force-update: "true"
+    argocd-image-updater.argoproj.io/git-branch: master
+    #argocd.argoproj.io/manifest-generate-paths: ../../../
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  project: test
+  source:
+    path: ./resources/test
+    repoURL: ssh://git@awsuse1dcibit02.dciresource.local:7999/esg-db/demandbetter-argocd.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
